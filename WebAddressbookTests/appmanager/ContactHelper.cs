@@ -17,12 +17,30 @@ namespace WebAddressBookTests
         {
 
         }
-
         public ContactHelper CreateContact(ContactData contact)
         {
             FillContactForm(contact);
-            SumbitContactForm();
+            SubmitContactForm();
             ReturnToHomePage();
+            return this;
+        }
+        public ContactHelper ModifyContact(ContactData modifContact)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact();
+            FillContactForm(modifContact);
+            SubmitModifiedContact();
+            ReturnToHomePage();
+
+            return this;
+        }
+        public ContactHelper RemoveContact()
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact();
+            RemoveOneContact();
+            //ReturnToHomePage();
+
             return this;
         }
         public ContactHelper ReturnToHomePage()
@@ -30,7 +48,7 @@ namespace WebAddressBookTests
             driver.FindElement(By.LinkText("home")).Click();
             return this;
         }
-        public ContactHelper SumbitContactForm()
+        public ContactHelper SubmitContactForm()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
             return this;
@@ -56,6 +74,25 @@ namespace WebAddressBookTests
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
+        public ContactHelper SelectContact()
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[5]")).Click();
+            //  driver.FindElement(By.XPath("(//img[@alt='Edit'])[14]")).Click();
+            //driver.FindElement(By.XPath("//tr[6]/td[8]/a/img")).Click();
+
+            return this;
+        }
+        public ContactHelper SubmitModifiedContact()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }         
+        public ContactHelper RemoveOneContact()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
+            return this;
+        }
+
 
     }
 }

@@ -10,7 +10,7 @@ namespace WebAddressBookTests
     [TestFixture]
     public class GroupRemovalTests: TestBase 
     {
-                [Test]
+        [Test]
         public void GroupRemovalTest()
         {
             app.Groups.Remove(1);

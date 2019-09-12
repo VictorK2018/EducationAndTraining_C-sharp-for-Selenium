@@ -20,7 +20,8 @@ namespace WebAddressBookTests
         }
         public void GoToHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL + "/addressbook/group.php");
+            // driver.Navigate().GoToUrl(baseURL + "/addressbook/group.php");
+            driver.Navigate().GoToUrl(baseURL + "/addressbook");
         }
 
         public void GoGroupsPage()
