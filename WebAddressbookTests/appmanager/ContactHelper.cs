@@ -37,8 +37,8 @@ namespace WebAddressBookTests
         public ContactHelper RemoveContact()
         {
             manager.Navigator.GoToHomePage();
-            SelectContact();
-            RemoveOneContact();
+            SelectDeleteContact();
+            DeleteContact();
             //ReturnToHomePage();
 
             return this;
@@ -76,10 +76,8 @@ namespace WebAddressBookTests
         }
         public ContactHelper SelectContact()
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[5]")).Click();
-            //  driver.FindElement(By.XPath("(//img[@alt='Edit'])[14]")).Click();
-            //driver.FindElement(By.XPath("//tr[6]/td[8]/a/img")).Click();
-
+            // select 1-st contact to Edit/Modify
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
             return this;
         }
         public ContactHelper SubmitModifiedContact()
@@ -87,9 +85,17 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("update")).Click();
             return this;
         }         
-        public ContactHelper RemoveOneContact()
+
+        public ContactHelper SelectDeleteContact()
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
+            // select 1-st contact to Delete
+            driver.FindElement(By.Name("selected[]")).Click();
+            return this;
+        }
+        public ContactHelper DeleteContact()
+        {            
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
             return this;
         }
 
