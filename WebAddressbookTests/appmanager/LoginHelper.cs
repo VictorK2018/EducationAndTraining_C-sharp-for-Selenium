@@ -20,13 +20,40 @@ namespace WebAddressBookTests
 
         public void Login(AccountData account)
         {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            // we are logged in?
+            if (IsLoggedIn())
+            {
+                // we are logged in with rigth credentials?
+                if (IsLoggedIn(account))
+                {
+                    return;
+                }
+
+                Logout();
+            }
+
+            //driver.FindElement(By.Name("user")).Click();
+            Type(By.Name("user"), account.Username);    
+            //driver.FindElement(By.Name("pass")).Click();
+            Type(By.Name("pass"), account.Password);     
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
+
+        public void Logout()
+        {
+            if (IsLoggedIn())
+            {
+                driver.FindElement(By.LinkText("Logout")).Click();
+            }       
+        }
+        public bool IsLoggedIn()
+        {
+            return IsElementPresent(By.Name("logout"));
+        }
+        public bool IsLoggedIn(AccountData account)
+        {
+            return driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
+                == "(" + account.Username + ")";
         }
 
     }
