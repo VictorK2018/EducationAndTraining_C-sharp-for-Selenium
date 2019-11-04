@@ -74,7 +74,7 @@ namespace WebAddressBookTests
             return this;
         }
         public GroupHelper SelectGroup(int index)
-        {
+        {            
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
@@ -83,7 +83,6 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("delete")).Click();
             return this;
         }
-
         public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
@@ -95,6 +94,12 @@ namespace WebAddressBookTests
             return this;           
         }
 
+        public bool IsGroupPresent(int index)
+        {            
+            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            // takes all XPath ...selected[index]...   
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
+        }
 
     }
 }

@@ -19,7 +19,7 @@ namespace WebAddressBookTests
         }
 
         public void Login(AccountData account)
-        {
+        {            
             // we are logged in?
             if (IsLoggedIn())
             {
@@ -32,6 +32,9 @@ namespace WebAddressBookTests
                 Logout();
             }
 
+            // set waiting
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+
             //driver.FindElement(By.Name("user")).Click();
             Type(By.Name("user"), account.Username);    
             //driver.FindElement(By.Name("pass")).Click();
@@ -40,7 +43,7 @@ namespace WebAddressBookTests
         }
 
         public void Logout()
-        {
+        {            
             if (IsLoggedIn())
             {
                 driver.FindElement(By.LinkText("Logout")).Click();

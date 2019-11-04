@@ -34,7 +34,7 @@ namespace WebAddressBookTests
             AccountData account = new AccountData("admin", "invalidpass");
             app.Auth.Login(account);
 
-            //verification -check if error in code:
+            //verification -check:
             Assert.IsFalse(app.Auth.IsLoggedIn(account));
         }
 
