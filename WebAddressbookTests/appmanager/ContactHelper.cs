@@ -39,7 +39,9 @@ namespace WebAddressBookTests
             manager.Navigator.GoToHomePage();
             SelectDeleteContact();
             DeleteContact();
-            //ReturnToHomePage();
+            //ReturnToHomePage();                        
+            driver.FindElement(By.CssSelector("div.msgbox"));
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
 
             return this;
         }
@@ -97,6 +99,11 @@ namespace WebAddressBookTests
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
             return this;
+        }
+
+        public bool IsContactPresent()
+        {
+            return IsElementPresent(By.Name("selected[]"));
         }
 
 

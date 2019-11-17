@@ -11,37 +11,33 @@ namespace WebAddressBookTests
     public class GroupRemovalTests: AuthTestBase
     {
         [Test]
-        public void GroupYesTest()
+        public void GroupRemovalTest()
         {
-            app.Groups.Remove(1);
+            // prepare to test
+            app.Navigator.GoGroupsPage();
             
-            //app.Navigator.GoGroupsPage();
-            //app.Groups
-            //    .SelectGroup(1)            
-            //    .RemoveGroup()           
-            //    .ReturnToGroupsPage();
+            // check if at least one group is present
+            if (app.Groups.IsGroupPresent(1))
+            {
+                app.Groups.Remove(1);
+                return;
+            }
 
-            //driver.FindElement(By.LinkText("Logout")).Click();
-        }
-
-        public void GroupNoTest()
-        {
-            // prepare-if previous test was with Group, set up Start for this test:
-            app.Groups.Remove(1);
-
-            // action - create Group
-            GroupData group = new GroupData("nnn");
+            // action
+            // else - create gpoup to delete
+            GroupData group = new GroupData("created by test");
             group.Header = "hhh";
             group.Footer = "fff";
 
             app.Groups.Create(group);
 
-            //verification
-            Assert.IsTrue(app.Groups.IsGroupPresent(1));
+            //delete just created group
+            app.Groups.Remove(1);
+
+            //check if no group left
+            Assert.IsFalse(app.Groups.IsGroupPresent(1));
+                      
         }
-
-
-        //}
 
     }
 }

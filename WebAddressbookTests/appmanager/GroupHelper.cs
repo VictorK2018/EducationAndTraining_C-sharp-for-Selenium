@@ -39,12 +39,14 @@ namespace WebAddressBookTests
 
             return this;
         }
+        
         public GroupHelper Remove(int p)
-        {
+        {     
             manager.Navigator.GoGroupsPage();
-            SelectGroup(p);
+            SelectGroup(p);                
             RemoveGroup();
             ReturnToGroupsPage();
+
             return this;
         }
         public GroupHelper InitGroupCreation()
@@ -74,8 +76,11 @@ namespace WebAddressBookTests
             return this;
         }
         public GroupHelper SelectGroup(int index)
-        {            
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+        {
+            // takes all XPath ...selected[index]...  
+            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            
+            driver.FindElement(By.CssSelector("input[name=\"selected[]\"]")).Click();
             return this;
         }
         public GroupHelper RemoveGroup()
@@ -95,10 +100,9 @@ namespace WebAddressBookTests
         }
 
         public bool IsGroupPresent(int index)
-        {            
-            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-            // takes all XPath ...selected[index]...   
+        {
             return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
+            //return IsElementPresent(By.CssSelector("input[name=\"selected[]\"]"));        
         }
 
     }
