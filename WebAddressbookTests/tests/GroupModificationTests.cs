@@ -13,13 +13,38 @@ namespace WebAddressBookTests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newData = new GroupData("mmm");
-            newData.Header = null;
-            newData.Footer = null;
-            //newData.Header = "mhhh";
-            //newData.Footer = "mfff";
+            // prepare to test
+            app.Navigator.GoGroupsPage();
 
-            app.Groups.Modify(1, newData);
+            // check if at least one group is present
+            if (app.Groups.IsGroupPresent(1))
+            {
+                GroupData newData = new GroupData("modified1Bytest");
+                //newData.Header = null;
+                //newData.Footer = null;
+                newData.Header = "mhhh";
+                newData.Footer = "mfff";
+
+                app.Groups.Modify(1, newData);
+                return;
+            }
+
+            // action
+            // else - create gpoup to modify
+            GroupData group = new GroupData("created by test");
+            group.Header = "hhh";
+            group.Footer = "fff";
+
+            app.Groups.Create(group);            
+
+            //modify created group
+            GroupData mofifData = new GroupData("modified2Bytest");
+            //newData.Header = null;
+            //newData.Footer = null;
+            mofifData.Header = "mhhh";
+            mofifData.Footer = "mfff";
+
+            app.Groups.Modify(1, mofifData);
         }
 
 

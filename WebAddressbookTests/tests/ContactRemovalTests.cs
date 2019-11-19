@@ -35,9 +35,6 @@ namespace WebAddressBookTests
             //delete created contact
             app.Contacts.RemoveContact();
 
-            //app.Navigator.GoGroupsPage();
-            //app.Navigator.GoToHomePage();
-
             //check if no contact left
             Assert.IsFalse(app.Contacts.IsContactPresent());
 

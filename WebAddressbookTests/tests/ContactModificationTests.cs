@@ -12,10 +12,33 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData modifContact = new ContactData("First_modif", "Last_modif");            
-            modifContact.Middlename = "Otchestvo_modif";
+            // prepare to test
+            app.Navigator.GoToHomePage();
 
-            app.Contacts.ModifyContact(modifContact);            
+            // check if at least one contact is present
+            if (app.Contacts.IsContactPresent())
+            {
+                ContactData modifContact1 = new ContactData("First_modif", "Last_modif");
+                modifContact1.Middlename = "Otchestvo_modif";
+
+                app.Contacts.ModifyContact(modifContact1);
+
+                return;
+            }
+
+            // action -create and modify contact
+            app.Contacts.InitContactCreation();
+            ContactData contact = new ContactData("firstNameBytest", "lastNameBytest");
+            contact.Middlename = "OtchestvoBytest";
+            app.Contacts.CreateContact(contact);
+
+            ContactData modifContact2 = new ContactData("First_modifBytest", "Last_modifBytest");            
+            modifContact2.Middlename = "Otchestvo_modif";
+
+            app.Contacts.ModifyContact(modifContact2);       
+            
+            // delete contact and check if deleted?
+
         }
     }
 }

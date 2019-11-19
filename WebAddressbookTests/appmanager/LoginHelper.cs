@@ -47,6 +47,10 @@ namespace WebAddressBookTests
             if (IsLoggedIn())
             {
                 driver.FindElement(By.LinkText("Logout")).Click();
+
+                //set delay after Logout
+                driver.FindElement(By.Name("user"));
+                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             }       
         }
         public bool IsLoggedIn()
