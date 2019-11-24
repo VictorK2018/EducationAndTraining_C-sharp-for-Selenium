@@ -17,22 +17,18 @@ namespace WebAddressBookTests
             // prepare to test
             app.Navigator.GoToHomePage();
 
-            // check if at least one contact is present
-            if (app.Contacts.IsContactPresent())
+            // check if no one contact is present
+            if (!app.Contacts.IsContactPresent())
             {
-                app.Contacts.RemoveContact();
+                // action - create contact 
+                app.Contacts.InitContactCreation();
+                ContactData contact = new ContactData("firstNameBytest", "lastNameBytest");
+                contact.Middlename = "OtchestvoBytest";
+                app.Contacts.CreateContact(contact);
 
-                return;
-            }
+            }                   
 
-            // action
-            // else - create contact 
-            app.Contacts.InitContactCreation();
-            ContactData contact = new ContactData("firstNameBytest", "lastNameBytest");
-            contact.Middlename = "OtchestvoBytest";
-            app.Contacts.CreateContact(contact);            
-
-            //delete created contact
+            //delete created/existing contact
             app.Contacts.RemoveContact();
 
             //check if no contact left

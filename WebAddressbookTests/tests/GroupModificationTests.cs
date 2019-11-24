@@ -17,34 +17,22 @@ namespace WebAddressBookTests
             app.Navigator.GoGroupsPage();
 
             // check if at least one group is present
-            if (app.Groups.IsGroupPresent(1))
+            if (!app.Groups.IsGroupPresent(1))
             {
-                GroupData newData = new GroupData("modified1Bytest");
-                //newData.Header = null;
-                //newData.Footer = null;
-                newData.Header = "mhhh";
-                newData.Footer = "mfff";
+                // action - create group to modify
+                GroupData group = new GroupData("created by test");
+                group.Header = "hhh";
+                group.Footer = "fff";
 
-                app.Groups.Modify(1, newData);
-                return;
+                app.Groups.Create(group);
             }
 
-            // action
-            // else - create gpoup to modify
-            GroupData group = new GroupData("created by test");
-            group.Header = "hhh";
-            group.Footer = "fff";
+            // action modify created/existing group
+            GroupData newData = new GroupData("mmm");
+            newData.Header = "mhhh";
+            newData.Footer = "mfff";
 
-            app.Groups.Create(group);            
-
-            //modify created group
-            GroupData mofifData = new GroupData("modified2Bytest");
-            //newData.Header = null;
-            //newData.Footer = null;
-            mofifData.Header = "mhhh";
-            mofifData.Footer = "mfff";
-
-            app.Groups.Modify(1, mofifData);
+            app.Groups.Modify(1, newData);
         }
 
 

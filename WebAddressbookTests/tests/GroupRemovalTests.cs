@@ -17,21 +17,17 @@ namespace WebAddressBookTests
             app.Navigator.GoGroupsPage();
             
             // check if at least one group is present
-            if (app.Groups.IsGroupPresent(1))
+            if (!app.Groups.IsGroupPresent(1))
             {
-                app.Groups.Remove(1);
-                return;
-            }
+                // action - create group to delete
+                GroupData group = new GroupData("created by test");
+                group.Header = "hhh";
+                group.Footer = "fff";
 
-            // action
-            // else - create gpoup to delete
-            GroupData group = new GroupData("created by test");
-            group.Header = "hhh";
-            group.Footer = "fff";
+                app.Groups.Create(group);
+            }                     
 
-            app.Groups.Create(group);
-
-            //delete just created group
+            //delete created/existing group
             app.Groups.Remove(1);
 
             //check if no group left
