@@ -32,7 +32,10 @@ namespace WebAddressBookTests
             newData.Header = "mhhh";
             newData.Footer = "mfff";
 
-            app.Groups.Modify(1, newData);
+            ////Zadanie #8
+            //app.Groups.Modify(1, newData);
+
+            app.Groups.Modify(0, newData);
         }
 
 

@@ -77,10 +77,15 @@ namespace WebAddressBookTests
         }
         public GroupHelper SelectGroup(int index)
         {
+            // add "1" to index - be equal to Collection numeration (starting from "0")
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+
             // takes all XPath ...selected[index]...  
             //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-            
-            driver.FindElement(By.CssSelector("input[name=\"selected[]\"]")).Click();
+
+            // for Zadanie #8:
+            //driver.FindElement(By.CssSelector("input[name=\"selected[]\"]")).Click();
+
             return this;
         }
         public GroupHelper RemoveGroup()
@@ -101,8 +106,25 @@ namespace WebAddressBookTests
 
         public bool IsGroupPresent(int index)
         {
-            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
-            //return IsElementPresent(By.CssSelector("input[name=\"selected[]\"]"));        
+            // add "1" to index - be equal to Collection numeration (starting from "0")
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]"));
+
+            ////Zadanie #8
+            //return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
+              
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+
+            return groups;
         }
 
     }
