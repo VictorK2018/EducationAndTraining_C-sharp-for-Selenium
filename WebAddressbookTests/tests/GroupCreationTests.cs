@@ -14,7 +14,7 @@ namespace WebAddressBookTests
         [Test]
         public void GroupCreationTest()
         {
-            GroupData group = new GroupData("nnn");
+            GroupData group = new GroupData("fromtest");
             group.Header = "hhh";
             group.Footer = "fff";
 
@@ -24,7 +24,9 @@ namespace WebAddressBookTests
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
-            Assert.AreEqual(oldGroups.Count, newGroups.Count);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -39,24 +41,30 @@ namespace WebAddressBookTests
             app.Groups.Create(group);
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
-        //[Test]
+        [Test]
 
-        //public void BadNameGroupCreationTest()
-        //{
-        //    GroupData group = new GroupData("a'a");
-        //    group.Header = "";
-        //    group.Footer = "";
+        public void BadNameGroupCreationTest()
+        {
+            GroupData group = new GroupData("a'a");
+            group.Header = "";
+            group.Footer = "";
 
-        //    List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-        //    app.Groups.Create(group);
+            app.Groups.Create(group);
 
-        //    List<GroupData> newGroups = app.Groups.GetGroupList();
-        //    Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-        //}
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+        }
 
     }
 }
