@@ -20,14 +20,14 @@ namespace WebAddressBookTests
             if (!app.Groups.IsGroupPresent(1))
             {
                 // action - create group to modify
-                GroupData group = new GroupData("created by test");
+                GroupData group = new GroupData("created for modification");
                 group.Header = "hhh";
                 group.Footer = "fff";
 
                 app.Groups.Create(group);
             }
 
-            // action modify created/existing group
+            // action - prepare to modify created/existing group
             GroupData newData = new GroupData("mmm");
             newData.Header = null;
             newData.Footer = null;

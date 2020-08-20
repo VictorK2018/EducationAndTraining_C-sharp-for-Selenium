@@ -106,6 +106,26 @@ namespace WebAddressBookTests
             return IsElementPresent(By.Name("selected[]"));
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-of-type(2)"));
+            //foreach (IWebElement element in elements)
+            //{
+            //    contacts.Add(new ContactData(element.Text));
+            //    //contacts.Add(new ContactData(string.Format(element.Text)));
+            //}
+
+            //return contacts;
+
+            foreach (IWebElement element in elements)
+            {
+                Console.WriteLine(element.Text);
+            }
+
+            return contacts;
+        }
 
     }
 }

@@ -17,23 +17,30 @@ namespace WebAddressBookTests
             // prepare to test
             app.Navigator.GoGroupsPage();
 
-            //get list before deleting
+            // check if at least one group is present
+            if (!app.Groups.IsGroupPresent(1))
+            {
+                // action - create group to modify
+                GroupData group = new GroupData("created for modification");
+                group.Header = "hhh";
+                group.Footer = "fff";
+
+                app.Groups.Create(group);
+            }
+
+            //get old list before deleting
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            ////Zadanie #8
-            //app.Groups.Remove(1);
-
-            //delete 1-st group
+            //delete created/existing group
             app.Groups.Remove(0);
 
-            //get list after deleting
+            //get new list after deleting
             List<GroupData> newGroups = app.Groups.GetGroupList();
-
-            //delete 1-st element from old list
             oldGroups.RemoveAt(0);
-
-            //compare lists
+            oldGroups.Sort();
+            newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
         }
 
         //// zadanie #8:

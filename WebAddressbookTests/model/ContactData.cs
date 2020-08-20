@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAddressBookTests
+namespace WebAddressBookTests 
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>
     {
         private string firstname;
         private string lastname;
@@ -36,6 +36,42 @@ namespace WebAddressBookTests
             this.firstname = firstname;
             this.lastname = lastname;
         }
+        public bool Equals(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            // The & operator computes the logical AND of its operands. 
+            // The result of x & y is true if both x and y evaluate to true. 
+            // Otherwise, the result is false.
+            return firstname == other.Firstname & lastname == other.Lastname;
+        }
+
+        public override int GetHashCode()
+        {
+            return firstname.GetHashCode() & lastname.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "firstname=" + Firstname +"," + "lastname=" + Lastname;
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return Firstname.CompareTo(other.Firstname) & Lastname.CompareTo(other.Lastname);
+        }
 
         public string Firstname
         {
@@ -49,7 +85,6 @@ namespace WebAddressBookTests
                 firstname = value;
             }
         }
-
         public string Lastname
         {
             get
@@ -62,7 +97,6 @@ namespace WebAddressBookTests
                 lastname = value;
             }
         }
-
         public string Middlename
         {
             get
