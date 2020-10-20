@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WebAddressBookTests 
+namespace WebAddressBookTests
 {
-    public class ContactData : IEquatable<ContactData>
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstname;
         private string lastname;
@@ -31,6 +27,7 @@ namespace WebAddressBookTests
         //private string secondaryhome = "";
         //private string notes = "";
 
+        //constructor
         public ContactData(string firstname, string lastname)
         {
             this.firstname = firstname;
@@ -51,6 +48,7 @@ namespace WebAddressBookTests
             // The & operator computes the logical AND of its operands. 
             // The result of x & y is true if both x and y evaluate to true. 
             // Otherwise, the result is false.
+
             return firstname == other.Firstname & lastname == other.Lastname;
         }
 
@@ -61,7 +59,7 @@ namespace WebAddressBookTests
 
         public override string ToString()
         {
-            return "firstname=" + Firstname +"," + "lastname=" + Lastname;
+            return "firstname= " + Firstname + "," + "lastname= " + Lastname;
         }
 
         public int CompareTo(ContactData other)
@@ -70,7 +68,22 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname) & Lastname.CompareTo(other.Lastname);
+
+            else if (firstname.CompareTo(other.firstname) == 0)
+            {
+                return lastname.CompareTo(other.lastname);
+            }
+
+            else
+            {
+                return firstname.CompareTo(other.firstname);
+            }
+
+            //if (Object.ReferenceEquals(other, null))
+            //{
+            //    return 1;
+            //}
+            //return Firstname.CompareTo(other.Firstname) & Lastname.CompareTo(other.Lastname);   
         }
 
         public string Firstname

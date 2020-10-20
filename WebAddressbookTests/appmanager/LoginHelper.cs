@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
+using System;
 
 namespace WebAddressBookTests
 {
-    public class LoginHelper: HelperBase
+    public class LoginHelper : HelperBase
     {
         //private IWebDriver driver;
         public LoginHelper(ApplicationManager manager)
             : base(manager)
         {
- 
+
         }
 
         public void Login(AccountData account)
-        {            
+        {
             // we are logged in?
             if (IsLoggedIn())
             {
@@ -36,14 +30,14 @@ namespace WebAddressBookTests
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
             //driver.FindElement(By.Name("user")).Click();
-            Type(By.Name("user"), account.Username);    
+            Type(By.Name("user"), account.Username);
             //driver.FindElement(By.Name("pass")).Click();
-            Type(By.Name("pass"), account.Password);     
+            Type(By.Name("pass"), account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 
         public void Logout()
-        {            
+        {
             if (IsLoggedIn())
             {
                 driver.FindElement(By.LinkText("Logout")).Click();
@@ -51,7 +45,7 @@ namespace WebAddressBookTests
                 //set delay after Logout
                 driver.FindElement(By.Name("user"));
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
-            }       
+            }
         }
         public bool IsLoggedIn()
         {

@@ -1,11 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
@@ -39,11 +33,11 @@ namespace WebAddressBookTests
 
             return this;
         }
-        
+
         public GroupHelper Remove(int p)
-        {     
+        {
             manager.Navigator.GoGroupsPage();
-            SelectGroup(p);                
+            SelectGroup(p);
             RemoveGroup();
             ReturnToGroupsPage();
 
@@ -78,7 +72,7 @@ namespace WebAddressBookTests
         public GroupHelper SelectGroup(int index)
         {
             // add "1" to index - be equal to Collection numeration (starting from "0")
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
 
             // takes all XPath ...selected[index]...  
             //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
@@ -101,7 +95,7 @@ namespace WebAddressBookTests
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
-            return this;           
+            return this;
         }
 
         public bool IsGroupPresent(int index)
@@ -111,7 +105,7 @@ namespace WebAddressBookTests
 
             ////Zadanie #8
             //return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
-              
+
         }
 
         public List<GroupData> GetGroupList()

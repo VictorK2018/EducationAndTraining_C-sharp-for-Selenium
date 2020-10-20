@@ -1,21 +1,18 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupCreationTests: AuthTestBase
+    public class GroupCreationTests : AuthTestBase
     {
-        
+
         [Test]
         public void GroupCreationTest()
         {
             // action - prepare data for new group
-            GroupData group = new GroupData("created from test");
+            GroupData group = new GroupData("created from test check Sort");
             group.Header = "hhh";
             group.Footer = "fff";
 
@@ -25,9 +22,24 @@ namespace WebAddressBookTests
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(group);
+
+            Console.WriteLine("Old groups BEFORE sorting--->");
+            foreach (GroupData befsort in oldGroups)
+            {
+                Console.WriteLine(befsort);
+            }
+
             oldGroups.Sort();
             newGroups.Sort();
+
+            Console.WriteLine("Old groups AFTER SORTING--->");
+            foreach (GroupData befsort in oldGroups)
+            {
+                Console.WriteLine(befsort);
+            }
+
             Assert.AreEqual(oldGroups, newGroups);
+
         }
 
         [Test]

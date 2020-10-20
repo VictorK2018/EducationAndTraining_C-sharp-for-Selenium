@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 
 namespace WebAddressBookTests
 {
-    public class NavigationHelper: HelperBase
+    public class NavigationHelper : HelperBase
     {
         //private IWebDriver driver;
         private string baseURL;
         public NavigationHelper(ApplicationManager manager, string baseURL)
             : base(manager)
-        {            
+        {
             this.baseURL = baseURL;
         }
         public void GoToHomePage()
@@ -41,6 +34,6 @@ namespace WebAddressBookTests
             // otherwise means we are not on the right page, so click on Groups:
             driver.FindElement(By.LinkText("groups")).Click();
         }
-               
+
     }
 }

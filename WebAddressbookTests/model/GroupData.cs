@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebAddressBookTests
 
 {
-    public class GroupData: IEquatable<GroupData>, IComparable<GroupData>
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         private string name;
         private string header = "";

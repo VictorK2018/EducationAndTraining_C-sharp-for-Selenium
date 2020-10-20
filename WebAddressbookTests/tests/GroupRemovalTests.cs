@@ -1,15 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
-using NUnit.Framework;
 
 
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupRemovalTests: AuthTestBase
+    public class GroupRemovalTests : AuthTestBase
     {
         [Test]
         public void GroupRemovalTest()
@@ -49,7 +45,7 @@ namespace WebAddressBookTests
         //{
         //    // prepare to test
         //    app.Navigator.GoGroupsPage();
-            
+
         //    // check if at least one group is present
         //    if (!app.Groups.IsGroupPresent(1))
         //    {
@@ -66,7 +62,7 @@ namespace WebAddressBookTests
 
         //    //check if no group left
         //    Assert.IsFalse(app.Groups.IsGroupPresent(1));
-                      
+
         //}
 
     }

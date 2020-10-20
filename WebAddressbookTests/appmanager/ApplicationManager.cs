@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+using System;
+using System.Threading;
 
 namespace WebAddressBookTests
 {
@@ -27,7 +22,7 @@ namespace WebAddressBookTests
             driver = new FirefoxDriver();
 
             baseURL = "http://localhost";
-                       
+
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
@@ -47,9 +42,9 @@ namespace WebAddressBookTests
         }
         public static ApplicationManager GetInstance()
         {
-            if (! app.IsValueCreated)
+            if (!app.IsValueCreated)
             {
-                ApplicationManager newInstance = new ApplicationManager();                
+                ApplicationManager newInstance = new ApplicationManager();
                 newInstance.Navigator.GoToHomePage();
                 app.Value = newInstance;
             }
@@ -76,7 +71,7 @@ namespace WebAddressBookTests
             get
             {
                 return navigator;
-            }            
+            }
         }
 
         public GroupHelper Groups
@@ -84,7 +79,7 @@ namespace WebAddressBookTests
             get
             {
                 return groupHelper;
-            }            
+            }
         }
 
         public ContactHelper Contacts
@@ -94,7 +89,7 @@ namespace WebAddressBookTests
                 return contactHelper;
             }
         }
-        
-        
+
+
     }
 }

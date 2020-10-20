@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace WebAddressBookTests
 {
@@ -26,10 +21,10 @@ namespace WebAddressBookTests
             }
 
             // action -modify created/existing contact
-            ContactData modifContact = new ContactData("First_modifBytest", "Last_modifBytest");            
+            ContactData modifContact = new ContactData("First_modifBytest", "Last_modifBytest");
             modifContact.Middlename = "Otchestvo_modif";
 
-            app.Contacts.ModifyContact(modifContact);     
+            app.Contacts.ModifyContact(modifContact);
 
         }
 

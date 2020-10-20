@@ -1,14 +1,11 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupModificationTests: AuthTestBase
+    public class GroupModificationTests : AuthTestBase
     {
         [Test]
         public void GroupModificationTest()
@@ -41,8 +38,22 @@ namespace WebAddressBookTests
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0].Name = newData.Name;
+
+            Console.WriteLine("Old groups BEFORE sorting--->");
+            foreach (GroupData befsort in oldGroups)
+            {
+                Console.WriteLine(befsort);
+            }
+
             oldGroups.Sort();
             newGroups.Sort();
+
+            Console.WriteLine("Old groups AFTER sorting--->");
+            foreach (GroupData befsort in oldGroups)
+            {
+                Console.WriteLine(befsort);
+            }
+
             Assert.AreEqual(oldGroups, newGroups);
         }
 
