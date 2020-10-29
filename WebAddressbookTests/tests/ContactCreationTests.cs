@@ -29,37 +29,23 @@ namespace WebAddressBookTests
             //Adds an object to the end of the System.Collections.Generic.List`1.
             oldContacts.Add(contact);
 
-            Console.WriteLine("Old contacts before Sort--->");
-            foreach (ContactData contactsaftersort in oldContacts)
-            {
-                Console.WriteLine(contactsaftersort);
-            }
-
-            Console.WriteLine("New contacts before Sort--->");
-            foreach (ContactData contactsafter in newContacts)
-            {
-                Console.WriteLine(contactsafter);
-            }
-
             oldContacts.Sort();
             newContacts.Sort();
 
-            Console.WriteLine("Old contacts after Sort--->");
-            foreach (ContactData contactsaftersort in oldContacts)
-            {
-                Console.WriteLine(contactsaftersort);
-            }
-
-            Console.WriteLine("New contacts after Sort--->");
-            foreach (ContactData contactsafter in newContacts)
-            {
-                Console.WriteLine(contactsafter);
-            }
+            //Console.WriteLine("Old contacts after Sort--->");
+            //foreach (ContactData contactsaftersort in oldContacts)
+            //{
+            //    Console.WriteLine(contactsaftersort);
+            //}
+            //Console.WriteLine("New contacts after Sort--->");
+            //foreach (ContactData contactsafter in newContacts)
+            //{
+            //    Console.WriteLine(contactsafter);
+            //}
 
             Assert.AreEqual(oldContacts, newContacts);
 
             //driver.FindElement(By.LinkText("Logout")).Click();
-
         }
 
     }

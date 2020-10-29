@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace WebAddressBookTests
 {
@@ -111,29 +111,24 @@ namespace WebAddressBookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToHomePage();
+
             //Задание 8
             //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-of-type(2)"));
 
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector(("tr[name=entry] > td:nth-of-type(3)","tr[name=entry] > td:nth-of-type(2)")));
+            // get all names into collection:
+            //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector
+            //    (("tr[name=entry] > td:nth-of-type(3), tr[name=entry] > td:nth-of-type(2)")));          
 
-            //foreach (IWebElement element in elements)
-            //{
-            //    contacts.Add(new ContactData(element.Text));
-            //    //contacts.Add(new ContactData(string.Format(element.Text)));
-            //}
+            //get rows:
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=entry]"));
 
-            //return contacts;
-
+            //get names, text
             foreach (IWebElement element in elements)
             {
-                //contacts.Add(new ContactData("", element.Text));
-                contacts.Add(new ContactData(element.Text, element.Text));
-
-                Console.WriteLine(element.Text, element.Text);
-
+                IList<IWebElement> names = element.FindElements(By.CssSelector("td"));
+                contacts.Add(new ContactData(names[2].Text, names[1].Text));
             }
-
-            Console.WriteLine("______");
+            Console.WriteLine("row's number--->>" + elements.Count);
 
             return contacts;
         }
