@@ -1,4 +1,7 @@
 ﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAddressBookTests
 {
@@ -15,17 +18,31 @@ namespace WebAddressBookTests
             {
                 // action - create contact for modification
                 app.Contacts.InitContactCreation();
-                ContactData contact = new ContactData("firstNameBytest", "lastNameBytest");
-                contact.Middlename = "OtchestvoBytest";
+                ContactData contact = new ContactData("firstFortest", "lastFortest");
+                contact.Middlename = "OtchestvoFortest";
                 app.Contacts.CreateContact(contact);
             }
 
-            // action -modify created/existing contact
+            // action -prepare to modify created/existing contact
             ContactData modifContact = new ContactData("First_modifBytest", "Last_modifBytest");
             modifContact.Middlename = "Otchestvo_modif";
 
-            app.Contacts.ModifyContact(modifContact);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
+            ////Zadanie #8
+            //app.Contacts.ModifyContact(modifContact);
+
+            app.Contacts.ModifyContact(0, modifContact);
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Firstname = modifContact.Firstname;
+            oldContacts[0].Lastname = modifContact.Lastname;
+
+            oldContacts.Sort();
+            newContacts.Sort();
+
+            Assert.AreEqual(oldContacts, newContacts);
+
+            //driver.FindElement(By.LinkText("Logout")).Click();
         }
 
     }

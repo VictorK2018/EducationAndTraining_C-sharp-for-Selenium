@@ -105,7 +105,6 @@ namespace WebAddressBookTests
 
             ////Zadanie #8
             //return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
-
         }
 
         public List<GroupData> GetGroupList()

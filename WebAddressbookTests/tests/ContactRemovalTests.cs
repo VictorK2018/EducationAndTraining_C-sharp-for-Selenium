@@ -14,28 +14,35 @@ namespace WebAddressBookTests
             // prepare to test
             app.Navigator.GoToHomePage();
 
-            //get list before deleting
+            // uncomment for test:     
+            // check if no one contact is present
+            if (!app.Contacts.IsContactPresent())
+            {
+                // action - create contact 
+                app.Contacts.InitContactCreation();
+                ContactData contact = new ContactData("firstNameBytest", "lastNameBytest");
+                contact.Middlename = "OtchestvoBytest";
+                app.Contacts.CreateContact(contact);
+            }
+
+            //get old list before deleting
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-            Console.WriteLine(oldContacts);
+            //Console.WriteLine(oldContacts);
 
-            //uncomment for test:
+            //delete created/existing contact
+            app.Contacts.RemoveContact(0);
 
-            //// check if no one contact is present
-            //if (!app.Contacts.IsContactPresent())
-            //{
-            //    // action - create contact 
-            //    app.Contacts.InitContactCreation();
-            //    ContactData contact = new ContactData("firstNameBytest", "lastNameBytest");
-            //    contact.Middlename = "OtchestvoBytest";
-            //    app.Contacts.CreateContact(contact);
+            //get new list after deleting
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts.RemoveAt(0);
 
-            //}                   
+            oldContacts.Sort();
+            newContacts.Sort();
 
-            ////delete created/existing contact
-            //app.Contacts.RemoveContact();
+            Assert.AreEqual(oldContacts, newContacts);
 
             ////check if no contact left
-            //Assert.IsFalse(app.Contacts.IsContactPresent());
+            // Assert.IsFalse(app.Contacts.IsContactPresent());
 
         }
 

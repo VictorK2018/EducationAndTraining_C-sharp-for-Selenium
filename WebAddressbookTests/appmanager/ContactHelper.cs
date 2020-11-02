@@ -19,20 +19,20 @@ namespace WebAddressBookTests
             ReturnToHomePage();
             return this;
         }
-        public ContactHelper ModifyContact(ContactData modifContact)
+        public ContactHelper ModifyContact(int p, ContactData modifContact)
         {
             manager.Navigator.GoToHomePage();
-            SelectContact();
+            ModifContact(p);
             FillContactForm(modifContact);
             SubmitModifiedContact();
             ReturnToHomePage();
 
             return this;
         }
-        public ContactHelper RemoveContact()
+        public ContactHelper RemoveContact(int p)
         {
             manager.Navigator.GoToHomePage();
-            SelectDeleteContact();
+            SelectContact(p);
             DeleteContact();
             //ReturnToHomePage();                        
             driver.FindElement(By.CssSelector("div.msgbox"));
@@ -77,31 +77,49 @@ namespace WebAddressBookTests
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
-        public ContactHelper SelectContact()
-        {
-            // select 1-st contact to Edit/Modify
-            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+
+        // select contact for delete, send e-mail etc.
+        public ContactHelper SelectContact( int index)
+        {            
+            // add '2' to be 1-st row names in XPath     
+            //driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[2]/td/input")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr["+ (index + 2) + "]/td/input")).Click();
             return this;
         }
+
+        // select contact for editing
+        public ContactHelper ModifContact(int index)
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + (index + 2) + "]/td[8]/a/img")).Click();
+            return this; 
+        }
+
+        // Zadanie#8     
+        //    // select 1-st contact to Edit/Modify
+        //    driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+
+
+
         public ContactHelper SubmitModifiedContact()
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
-        public ContactHelper SelectDeleteContact()
-        {
-            // select 1-st contact to Delete
-            driver.FindElement(By.Name("selected[]")).Click();
-            return this;
-        }
+        //// Zadanie#7 - delete contact from main page
+        //public ContactHelper SelectDeleteContact()
+        //{
+        //    // select 1-st contact to Delete
+        //    driver.FindElement(By.Name("selected[]")).Click();
+        //    return this;
+        //}
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
             return this;
         }
-
+                
         public bool IsContactPresent()
         {
             return IsElementPresent(By.Name("selected[]"));
@@ -128,7 +146,8 @@ namespace WebAddressBookTests
                 IList<IWebElement> names = element.FindElements(By.CssSelector("td"));
                 contacts.Add(new ContactData(names[2].Text, names[1].Text));
             }
-            Console.WriteLine("row's number--->>" + elements.Count);
+            
+            //Console.WriteLine("row's number--->>" + elements.Count);
 
             return contacts;
         }
