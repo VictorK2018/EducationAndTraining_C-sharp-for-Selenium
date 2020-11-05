@@ -48,6 +48,35 @@ namespace WebAddressBookTests
             //driver.FindElement(By.LinkText("Logout")).Click();
         }
 
+        [Test]
+        public void EmptyContactCreationtest()
+        {
+            //get list before creating contact
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            // action - prepare data for new contact
+            app.Contacts.InitContactCreation();
+            ContactData contact = new ContactData("", "");
+            contact.Middlename = "";
+
+            // create new contact
+            app.Contacts.CreateContact(contact);
+
+            //get list after creating contact
+            List<ContactData> newContacts = app.Contacts.GetContactList();           
+
+            //Adds an object to the end of the System.Collections.Generic.List`1.
+            oldContacts.Add(contact);
+
+            oldContacts.Sort();
+            newContacts.Sort();
+
+            Assert.AreEqual(oldContacts, newContacts);
+
+            //driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+
     }
 }
 

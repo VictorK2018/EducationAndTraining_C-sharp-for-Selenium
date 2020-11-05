@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 using System.Collections.Generic;
 
 namespace WebAddressBookTests
@@ -62,6 +63,7 @@ namespace WebAddressBookTests
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCash = null;
             return this;
         }
         public GroupHelper ReturnToGroupsPage()
@@ -85,6 +87,7 @@ namespace WebAddressBookTests
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCash = null;
             return this;
         }
         public GroupHelper InitGroupModification()
@@ -95,6 +98,7 @@ namespace WebAddressBookTests
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCash = null;
             return this;
         }
 
@@ -107,18 +111,38 @@ namespace WebAddressBookTests
             //return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
         }
 
+        private List<GroupData> groupCash = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
+            if  (groupCash == null)
             {
-                groups.Add(new GroupData(element.Text));
+                groupCash = new List<GroupData>();
+                manager.Navigator.GoGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    //long record:
+                    //GroupData group = new GroupData(element.Text) {
+                    //    Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    //    }                    
+                    //group.Id = element.FindElement(By.TagName("input")).GetAttribute("value");
+                    //groupCash.Add(group);
+
+                    groupCash.Add(new GroupData(element.Text) {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
 
-            return groups;
+            return new List<GroupData>(groupCash);
         }
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
+
 
     }
 }

@@ -5,13 +5,16 @@ namespace WebAddressBookTests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string name;
-        private string header = "";
-        private string footer = "";
+        // for shot record these can be removed, see down in this class (see lecture 4.5):
+        //private string name;
+        //private string header = "";
+        //private string footer = "";
 
         public GroupData(string name)
         {
-            this.name = name;
+            Name = name;
+            // long record of this:
+            //this.name = name;
         }
 
         public bool Equals(GroupData other)
@@ -48,45 +51,54 @@ namespace WebAddressBookTests
 
             return Name.CompareTo(other.Name);
         }
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
 
-            set
-            {
-                name = value;
-            }
-        }
+        //shot record (see lecture 4.5):
+        public string Name { get; set; }
 
-        public string Header
-        {
-            get
-            {
-                return header;
-            }
+        // long record of this:
+        //{
+        //    get
+        //    {
+        //        return name;
+        //    }
 
-            set
-            {
-                header = value;
-            }
-        }
+        //    set
+        //    {
+        //        name = value;
+        //    }
+        //}
 
-        public string Footer
-        {
-            get
-            {
-                return footer;
-            }
+        //shot record (see lecture 4.5):
+        public string Header { get; set; }
+        // long record of this:
+        //{
+        //    get
+        //    {
+        //        return header;
+        //    }
 
-            set
-            {
-                footer = value;
-            }
-        }
+        //    set
+        //    {
+        //        header = value;
+        //    }
+        //}
 
+        //shot record (see lecture 4.5):
+        public string Footer { get; set; }
+        // long record of this:
+        //{
+        //    get
+        //    {
+        //        return footer;
+        //    }
+
+        //    set
+        //    {
+        //        footer = value;
+        //    }
+        //}
+
+        public string Id { get; set; }
     }
 }
 
