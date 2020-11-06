@@ -43,21 +43,13 @@ namespace WebAddressBookTests
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0].Name = newData.Name;
 
-            //Console.WriteLine("Old groups BEFORE sorting--->");
-            //foreach (GroupData befsort in oldGroups)
-            //{
-            //    Console.WriteLine(befsort);
-            //}
-
             oldGroups.Sort();
             newGroups.Sort();
-
             //Console.WriteLine("Old groups AFTER sorting--->");
             //foreach (GroupData befsort in oldGroups)
             //{
             //    Console.WriteLine(befsort);
             //}
-
             Assert.AreEqual(oldGroups, newGroups);
 
             foreach (GroupData group in newGroups)
@@ -67,6 +59,7 @@ namespace WebAddressBookTests
                     Assert.AreEqual(newData.Name, group.Name);
                 }
             }
+
         }
 
     }

@@ -125,8 +125,7 @@ namespace WebAddressBookTests
                     //long record:
                     //GroupData group = new GroupData(element.Text) {
                     //    Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                    //    }                    
-                    //group.Id = element.FindElement(By.TagName("input")).GetAttribute("value");
+                    //    };                    
                     //groupCash.Add(group);
 
                     groupCash.Add(new GroupData(element.Text) {
@@ -141,8 +140,6 @@ namespace WebAddressBookTests
         {
             return driver.FindElements(By.CssSelector("span.group")).Count;
         }
-
-
 
     }
 }

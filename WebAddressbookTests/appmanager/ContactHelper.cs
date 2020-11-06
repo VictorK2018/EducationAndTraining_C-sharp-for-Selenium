@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace WebAddressBookTests
             SubmitContactForm();
             ReturnToHomePage();
             return this;
-        }
+         }
         public ContactHelper ModifyContact(int p, ContactData modifContact)
         {
             manager.Navigator.GoToHomePage();
@@ -36,7 +37,7 @@ namespace WebAddressBookTests
             DeleteContact();
             //ReturnToHomePage();                        
             driver.FindElement(By.CssSelector("div.msgbox"));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
 
             return this;
         }
@@ -48,6 +49,7 @@ namespace WebAddressBookTests
         public ContactHelper SubmitContactForm()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCash = null;
             return this;
         }
         public ContactHelper FillContactForm(ContactData contact)
@@ -98,11 +100,10 @@ namespace WebAddressBookTests
         //    // select 1-st contact to Edit/Modify
         //    driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
 
-
-
         public ContactHelper SubmitModifiedContact()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCash = null;
             return this;
         }
 
@@ -116,6 +117,7 @@ namespace WebAddressBookTests
         public ContactHelper DeleteContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCash = null;
             driver.SwitchTo().Alert().Accept();
             return this;
         }
@@ -125,31 +127,39 @@ namespace WebAddressBookTests
             return IsElementPresent(By.Name("selected[]"));
         }
 
+        private List<ContactData> contactCash = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-
-            //Задание 8
-            //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-of-type(2)"));
-
-            // get all names into collection:
-            //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector
-            //    (("tr[name=entry] > td:nth-of-type(3), tr[name=entry] > td:nth-of-type(2)")));          
-
-            //get rows:
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=entry]"));
-
-            //get names, text
-            foreach (IWebElement element in elements)
+            if (contactCash == null)
             {
-                IList<IWebElement> names = element.FindElements(By.CssSelector("td"));
-                contacts.Add(new ContactData(names[2].Text, names[1].Text));
-            }
-            
-            //Console.WriteLine("row's number--->>" + elements.Count);
+                contactCash = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
 
-            return contacts;
+                //Задание 8
+                //ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-of-type(2)"));       
+
+                //get rows:
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=entry]"));
+
+                //get names, text
+                foreach (IWebElement element in elements)
+                {   
+                    IList<IWebElement> names = element.FindElements(By.CssSelector("td"));                    
+                    contactCash.Add(new ContactData(names[2].Text, names[1].Text) {
+                        IdCont = element.FindElement(By.TagName("input")).GetAttribute("value")
+                        });
+                }
+                //Console.WriteLine("contacts Id's--->>" + IdCont );
+                //Console.WriteLine("row's number--->>" + elements.Count);
+            }
+
+            return new List<ContactData>(contactCash);
+        }
+
+        internal int GetContactsCount()
+        {
+            return driver.FindElements(By.CssSelector("tr[name=entry]")).Count;
         }
 
     }

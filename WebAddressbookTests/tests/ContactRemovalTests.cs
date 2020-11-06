@@ -30,16 +30,26 @@ namespace WebAddressBookTests
             //Console.WriteLine(oldContacts);
 
             //delete created/existing contact
-            app.Contacts.RemoveContact(0);
+            app.Contacts.RemoveContact(0);            
+
+            //perform quick check
+            Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
 
             //get new list after deleting
             List<ContactData> newContacts = app.Contacts.GetContactList();
+
+            ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(0);
 
             oldContacts.Sort();
             newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact1 in newContacts)
+            {
+                Assert.AreNotEqual(contact1.IdCont, toBeRemoved.IdCont);
+            }
 
             ////check if no contact left
             // Assert.IsFalse(app.Contacts.IsContactPresent());

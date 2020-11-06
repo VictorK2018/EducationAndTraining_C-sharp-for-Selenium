@@ -23,6 +23,8 @@ namespace WebAddressBookTests
             // create new contact
             app.Contacts.CreateContact(contact);
 
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactsCount());
+
             //get list after creating contact
             List<ContactData> newContacts = app.Contacts.GetContactList();           
 
@@ -37,11 +39,11 @@ namespace WebAddressBookTests
             //{
             //    Console.WriteLine(contactsaftersort);
             //}
-            //Console.WriteLine("New contacts after Sort--->");
-            //foreach (ContactData contactsafter in newContacts)
-            //{
-            //    Console.WriteLine(contactsafter);
-            //}
+            Console.WriteLine("New contacts after Sort--->");
+            foreach (ContactData contactsafter in newContacts)
+            {
+                Console.WriteLine(contactsafter);
+            }
 
             Assert.AreEqual(oldContacts, newContacts);
 

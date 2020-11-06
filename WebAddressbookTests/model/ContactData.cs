@@ -4,9 +4,11 @@ namespace WebAddressBookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
-        private string lastname;
-        private string middlename = "";
+        // short record, see down:
+        // private string firstname;
+        // private string lastname;
+        // private string middlename = "";
+
         //private string nickname = "";
         //private string photo = "";
         //private string title = "";
@@ -30,8 +32,11 @@ namespace WebAddressBookTests
         //constructor
         public ContactData(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            Firstname = firstname;
+            Lastname = lastname;
+            // long record of this:
+            //this.firstname = firstname;
+            //this.lastname = lastname;
         }
         public bool Equals(ContactData other)
         {
@@ -49,12 +54,16 @@ namespace WebAddressBookTests
             // The result of x & y is true if both x and y evaluate to true. 
             // Otherwise, the result is false.
 
-            return firstname == other.Firstname & lastname == other.Lastname;
+            return Firstname == other.Firstname & Lastname == other.Lastname;
+            // long record of this:
+            //return firstname == other.Firstname & lastname == other.Lastname;
         }
 
         public override int GetHashCode()
         {
-            return firstname.GetHashCode() & lastname.GetHashCode();
+            return Firstname.GetHashCode() & Lastname.GetHashCode();
+            // long record of this:
+            //return firstname.GetHashCode() & lastname.GetHashCode();
         }
 
         public override string ToString()
@@ -69,59 +78,66 @@ namespace WebAddressBookTests
                 return 1;
             }
 
-            else if (firstname.CompareTo(other.firstname) == 0)
+            else if (Lastname.CompareTo(other.Lastname) == 0)
             {
-                return lastname.CompareTo(other.lastname);
+                return Firstname.CompareTo(other.Firstname);
             }
 
             else
             {
-                return firstname.CompareTo(other.firstname);
+                return Lastname.CompareTo(other.Lastname);
             }
 
-            //if (Object.ReferenceEquals(other, null))
+
+            // long record of this:
+            //else if (lastname.CompareTo(other.lastname) == 0)
             //{
-            //    return 1;
+            //    return firstname.CompareTo(other.firstname);
             //}
-            //return Firstname.CompareTo(other.Firstname) & Lastname.CompareTo(other.Lastname);   
+
+            //else
+            //{
+            //    return lastname.CompareTo(other.lastname);
+            //}
         }
 
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
+        public string Firstname { get; set; }
+        //{
+        //    get
+        //    {
+        //        return firstname;
+        //    }
 
-            set
-            {
-                firstname = value;
-            }
-        }
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
+        //    set
+        //    {
+        //        firstname = value;
+        //    }
+        //}
+        public string Lastname { get; set; }
+        //{
+        //    get
+        //    {
+        //        return lastname;
+        //    }
 
-            set
-            {
-                lastname = value;
-            }
-        }
-        public string Middlename
-        {
-            get
-            {
-                return middlename;
-            }
+        //    set
+        //    {
+        //        lastname = value;
+        //    }
+        //}
+        public string Middlename { get; set; }
+        //{
+        //    get
+        //    {
+        //        return middlename;
+        //    }
 
-            set
-            {
-                middlename = value;
-            }
-        }
+        //    set
+        //    {
+        //        middlename = value;
+        //    }
+        //}
 
+        public string IdCont { get; set; }
     }
 }

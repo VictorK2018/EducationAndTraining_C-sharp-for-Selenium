@@ -28,11 +28,16 @@ namespace WebAddressBookTests
             modifContact.Middlename = "Otchestvo_modif";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData oldData = oldContacts[0];
 
             ////Zadanie #8
             //app.Contacts.ModifyContact(modifContact);
 
             app.Contacts.ModifyContact(0, modifContact);
+
+            //perform quick check
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactList();
             oldContacts[0].Firstname = modifContact.Firstname;
             oldContacts[0].Lastname = modifContact.Lastname;
@@ -41,6 +46,14 @@ namespace WebAddressBookTests
             newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact1 in newContacts)
+            {
+                if (contact1.IdCont == oldData.IdCont)
+                {
+                    Assert.AreEqual((modifContact.Firstname, modifContact.Lastname) , (contact1.Firstname, contact1.Lastname));
+                }
+            }
 
             //driver.FindElement(By.LinkText("Logout")).Click();
         }
