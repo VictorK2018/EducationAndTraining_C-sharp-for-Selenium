@@ -1,0 +1,5 @@
+
+1. XAMPP as local web-server
+2. ''PHP Address Book'' as training application ( https://sourceforge.net/projects/php-addressbook/ )
+3. MySQL ''PHP Address Book'' database as XAMPP module
+4. Interact via   http://localhost/... ( user: admin pass: secret )
