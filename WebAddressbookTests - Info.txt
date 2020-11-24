@@ -1,0 +1,6 @@
+
+1. XAMPP as local web-server
+2. ''PHP Address Book'' as training application ( https://sourceforge.net/projects/php-addressbook/ )
+3. MySQL ''PHP Address Book'' database as XAMPP module
+4. Visual Studio 2019 (NuGet Packages: NUnit v2.6.0.12054, Selenium.WebDriver v3.141.0, Selenium.Support v3.141.0)
+5. Interact via   http://localhost/... ( user: admin pass: secret )
