@@ -4,6 +4,7 @@
 All studied material is demonstrated in one cross-cutting example - 
 developing automated tests for a web application in C # using Selenium WebDrive ) 
 Задание 1/ Assignment # 1: Install software and prepare the infrastructure 
+
 Задание 2/ Assignment # 2: Create the first working test
 Задание 3/ Assignment # 3: Create Helper Methods and Classes ( for ''contact groups'' ) 
 Задание 4/ Assignment # 4: The same as Assignment # 3, but implemented for ''contacts'' 
