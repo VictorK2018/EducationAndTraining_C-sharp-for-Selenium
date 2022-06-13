@@ -1,2 +1,5 @@
 # C-sharp-b6-new
-Программирование на С# для тестировщиков, Б6, Б8
+С# для тестировщиков 
+( C-sharp programming for testers:
+All studied materials are demonstrated demonstrated in one cross-cutting example - 
+developing automated tests for a web application in C # using Selenium WebDriver ) 
